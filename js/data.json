@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "nombre": "piedra",
+        "imagen": "./img/piedra.png"
+    },
+    {
+        "id": 2,
+        "nombre": "papel",
+        "imagen": "./img/papel.png"
+    },
+    {
+        "id": 3,
+        "nombre": "tijera",
+        "imagen": "./img/tijera.png"
+    },
+    {
+        "id": 4,
+        "nombre": "lagarto",
+        "imagen": "./img/lagarto.png"
+    },
+    {
+        "id": 5,
+        "nombre": "spock",
+        "imagen": "./img/spock.png"
+    }
+]

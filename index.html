@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego clasico</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+    <div class="resultadoFinal"></div>
+        <div class="contenedor">
+            <h1>Piedra, Papel, Tijera, Lagarto, Spock</h1>
+           
+            <div class="input-div">
+                <input type="text" class="input" placeholder="Ingrese su nombre">
+                <button class="boton_agregar"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="container">
+            </div>
+        
+            <main id="resultado">
+        
+                <img id="imgMaquina" src="./img/piedra.png">
+        
+                <div id="texto">
+                    Elije una opcion
+                </div>
+        
+                <img id="imgUsuario" src="./img/piedra.png">
+        
+            </main>
+        
+            <section id="botonesEleccion">
+                <button id="piedra" type="button"></button>
+                <button id="papel" type="button"></button>
+                <button id="tijera" type="button"></button>
+                <button id="lagarto" type="button"></button>
+                <button id="spock" type="button"></button>
+                
+            </section>
+            
+            <section id="puntaje">
+                <h2>Usuario:</h2>
+                <p class="header_div-p" id="marcadorUsuario">0</p>
+                <h2>Computadora:</h2>
+                <p class="header_div-p" id="marcadorMaquina">0</p>
+            </section>
+        
+        
+            <footer>Basado en The Big Bang Theory <a target="_blank" href="https://www.youtube.com/watch?v=O5j4RGw6fHQ&ab_channel=wredants">..Video..</a></footer>
+        
+        </div>
+    
+    
+    <script src="https://kit.fontawesome.com/be6f6f9a32.js"></script>   
+   
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
