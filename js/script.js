@@ -22,6 +22,9 @@ let contadorGanadas;
 let contadorPerdidas;
 let inputItem = document.createElement ('input')
 let nuevoDiv = document.createElement ('div')
+
+let jugadores = []
+
 class Nombre {
     constructor (nombreUsuario) {
         this.crearDiv (nombreUsuario)
@@ -52,9 +55,9 @@ let fnChequearInput = () => {
     if (input.value != "") {
         
         new Nombre(input.value);
-        localStorage.setItem("Nombre", input.value)
         input.hidden = true
         agregar.hidden = true
+        //JSON.stringify
     }
 }
 
@@ -188,13 +191,23 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
         contadorPerdidas = document.getElementById("marcadorMaquina")
         let perdiste = Number(contadorPerdidas.innerHTML)
         
-        let win = {ganaste: `${ganaste} a ${perdiste}`}
-        let lose = {perdiste: `${perdiste} a ${ganaste}`}
+        let win = {
+            nombre: `${input.value}`,
+            victoria: `Gano ${ganaste} a ${perdiste}`
+        }
 
+        let lose = {
+            nombre: `${input.value}`,
+            derrota: `Perdio ${perdiste} a ${ganaste}`
+        }
+
+        // let win = {ganaste: `Ganaste ${input.value} ${ganaste} a ${perdiste}`}
+        // let lose = {perdiste: `Perdiste ${input.value} ${perdiste} a ${ganaste}`}
+        
         if(ganaste === 5){
-            localStorage.setItem("Gano", JSON.stringify(win.ganaste))
-            let gWin = localStorage.getItem("Gano")
-            fondoResultado.innerHTML = `FELICITACIONES, Ganaste ${gWin}`
+            sessionStorage.setItem("ganaste", `${input.value} ganaste`)
+            let fraseWin = sessionStorage.getItem("ganaste")
+            fondoResultado.innerHTML = `FELICITACIONES ${fraseWin}`
             fondoResultado.classList.add("fondoGanador")
             contenedorJuego.style.display ="none"
             btnReset.innerHTML = "Volver a jugar"
@@ -206,16 +219,17 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
             btnOtroJugador.classList.add("btnOtroJugador")
             fondoResultado.appendChild(btnOtroJugador)
             btnOtroJugador.hidden = false 
-
+            jugadores.push(win)
+            localStorage.setItem('Jugadores', JSON.stringify(jugadores))
             contadorGanadas.innerHTML = 0
             contadorPerdidas.innerHTML = 0
         }
 
         if(perdiste === 5){
-            localStorage.setItem("Perdio", JSON.stringify(lose.perdiste))
-            let lLose = localStorage.getItem("Perdio")
+            sessionStorage.setItem("perdiste", `${input.value} ganaste`)
+            let fraseLose = sessionStorage.getItem("perdiste")
 
-            fondoResultado.innerHTML = `SIGUE INTENTANDO, Perdiste ${lLose}`
+            fondoResultado.innerHTML = `SIGUE INTENTANDO, ${fraseLose}`
             fondoResultado.classList.add("fondoPerdedor")
             contenedorJuego.style.display = "none"
             
@@ -228,11 +242,11 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
             btnOtroJugador.classList.add("btnOtroJugador")
             fondoResultado.appendChild(btnOtroJugador)
             btnOtroJugador.hidden = false 
-            
+            jugadores.push(lose)
+            localStorage.setItem('Jugadores', JSON.stringify(jugadores))
             contadorGanadas.innerHTML = 0
             contadorPerdidas.innerHTML = 0
         }
-
     }
     
     let playGame = (opcionUsuario) => {
@@ -307,12 +321,13 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
         contenedor.removeChild(nuevoDiv)
         fnChequearInput()
     })
-
+    
+    
 }).catch(error => {
-    alert('error')    
-    // Swal.fire({
-        // icon: 'Se produjo un error',
-        // title: 'Oops...',
-        // text: 'A la brevedad sera solucionado',
-        // })  
+    // alert('error')    
+    Swal.fire({
+        icon: 'Se produjo un error',
+        title: 'Oops...',
+        text: 'A la brevedad sera solucionado',
+        })  
 })
