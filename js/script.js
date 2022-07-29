@@ -3,6 +3,7 @@ const btnPapel = document.getElementById("papel");
 const btnTijera = document.getElementById("tijera");
 const btnLagarto = document.getElementById("lagarto");
 const btnSpock = document.getElementById("spock");
+let botones = document.querySelectorAll("button")
 const texto = document.getElementById("texto");
 const titulo = document.querySelector("h1");
 const parrafoNombre = document.createElement("p");
@@ -57,7 +58,7 @@ let fnChequearInput = () => {
         new Nombre(input.value);
         input.hidden = true
         agregar.hidden = true
-        //JSON.stringify
+        
     }
 }
 
@@ -70,12 +71,27 @@ input.addEventListener("keydown", function(e){
 
 fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
     const [pi, pa, ti, la, sp] = data
+       
     const piedra = pi.nombre
     const papel = pa.nombre
     const tijera = ti.nombre
     const lagarto = la.nombre
     const spock = sp.nombre
     
+    data.forEach(e => {
+        if(e.nombre == piedra){
+            btnPiedra.style.backgroundColor = "red"
+        } else if (e.nombre == papel){
+            btnPapel.style.backgroundColor = "blue"
+        } else if (e.nombre == tijera){
+            btnTijera.style.backgroundColor = "green"
+        } else if (e.nombre == lagarto){
+            btnLagarto.style.backgroundColor = "purple"
+        } else if (e.nombre == spock){
+            btnSpock.style.backgroundColor = "orange"
+        }
+    })
+
     btnPiedra.insertAdjacentHTML('afterbegin',`<img src="${pi.imagen}" alt="${piedra}">`)
 
     btnPapel.insertAdjacentHTML('afterbegin',`<img src="${pa.imagen}" alt="${papel}">`)
@@ -200,9 +216,6 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
             nombre: `${input.value}`,
             derrota: `Perdio ${perdiste} a ${ganaste}`
         }
-
-        // let win = {ganaste: `Ganaste ${input.value} ${ganaste} a ${perdiste}`}
-        // let lose = {perdiste: `Perdiste ${input.value} ${perdiste} a ${ganaste}`}
         
         if(ganaste === 5){
             sessionStorage.setItem("ganaste", `${input.value} ganaste`)
@@ -226,7 +239,7 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
         }
 
         if(perdiste === 5){
-            sessionStorage.setItem("perdiste", `${input.value} ganaste`)
+            sessionStorage.setItem("perdiste", `${input.value} perdiste`)
             let fraseLose = sessionStorage.getItem("perdiste")
 
             fondoResultado.innerHTML = `SIGUE INTENTANDO, ${fraseLose}`
@@ -321,7 +334,6 @@ fetch("js/data.json").then(respuesta => respuesta.json()).then(data => {
         contenedor.removeChild(nuevoDiv)
         fnChequearInput()
     })
-    
     
 }).catch(error => {
     // alert('error')    
