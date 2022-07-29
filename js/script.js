@@ -343,8 +343,15 @@ fetch("js/data.json")
   })
   .catch((error) => {
     Swal.fire({
-      icon: "Se produjo un error",
-      title: "Oops...",
+      icon: "warning",
+      title: "Se produjo un error",
       text: "A la brevedad sera solucionado",
-    });
-  });
+    })
+  }).finally(info => {
+    Swal.fire({
+        icon: "success",
+        title: "Bienvenido",
+        text: "¡Gana el que llega primero a 5! Recuerde de Ingresar su Nombre",
+      })
+  })
+  ;
